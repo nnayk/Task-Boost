@@ -1,0 +1,334 @@
+body {
+  margin: 0;
+  padding: 10px;
+  font-family: Montserrat, Helvetica, sans-serif;
+  min-width: 400px;
+  background-color: rgb(233, 247, 252);
+}
+
+/*input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  margin-bottom: 4px;
+}*/
+
+/* Style the "Add" button */
+#addBtn {
+  margin-right: 5px;
+  padding: 8px;
+  background: #39a572;
+  border: 1px solid #39a572;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 18px;
+}
+
+#addSiteBtn,
+#rmGoals,
+#rmSites,
+#blockTab {
+  margin-right: 5px;
+  padding: 8px;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 18px;
+}
+
+#rmSites,
+#rmGoals {
+  background: rgb(231, 103, 103);
+  border: 1px solid rgb(231, 103, 103);
+}
+
+#addSiteBtn {
+  background: rgba(22, 22, 226, 0.342);
+  border: 1px rgba(22, 22, 226, 0.342);
+}
+
+#blockTab {
+  background: rgba(41, 131, 19, 0.342);
+  border: 1px rgba(1, 49, 35, 0.342);
+}
+
+#ola,
+#siteIn {
+  font-size: 26px;
+  color: rgb(53, 125, 151);
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 0;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input {
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.time span {
+  font-size: 50px;
+  color: rgb(53, 125, 151);
+}
+
+.timerButtons {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+  /*background-color: red;*/
+}
+
+#start-btn {
+  background: #3ab9a4;
+  border: 1px solid #3ab9a4;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 18px;
+  font-weight: bold;
+  margin-right: 45px;
+  cursor: pointer;
+}
+
+#reset-btn {
+  background: #f5f5f5;
+  border: #f5f5f5;
+  color: #c3c3c3;
+  padding: 10px 20px;
+  border-radius: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.timerButtons button:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+.goalPage button:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+#goalList li {
+  box-sizing: border-box;
+  margin: 0;
+  color: white;
+  font-size: 15px;
+  background: rgb(53, 125, 151);
+  margin: 0;
+  font-size: 18px;
+  padding: 5px 5px;
+  list-style: none;
+}
+
+#goalList li:nth-child(odd) {
+  background: rgb(144, 208, 231);
+}
+
+.sitesPage button:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+#siteList li {
+  box-sizing: border-box;
+  margin: 0;
+  color: white;
+  font-size: 15px;
+  background: rgb(53, 125, 151);
+  margin: 0;
+  font-size: 18px;
+  padding: 5px 5px;
+  list-style: none;
+}
+
+#siteList li:nth-child(odd) {
+  background: rgb(144, 208, 231);
+}
+
+ul {
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+li {
+  margin-top: 5px;
+}
+
+.close,
+.close2 {
+  position: absolute;
+  right: 12px;
+}
+
+.close:hover {
+  background-color: #f44336;
+}
+
+.close2:hover {
+  background-color: #f44336;
+}
+
+button:disabled,
+button[disabled="disabled"] {
+  background: #f5f5f5;
+  color: #c3c3c3;
+}
+#minutes,
+#hours,
+#seconds {
+  background-color: rgb(233, 247, 252);
+  position: relative;
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+  border-color: none;
+  font-size: 50px;
+  /* color: white; */
+  color: rgb(53, 125, 151);
+  width: 50%;
+}
+
+#minutes {
+  text-align: center;
+}
+#hours {
+  text-align: right;
+  margin-right: 25px;
+}
+
+#seconds {
+  text-align: center;
+}
+.time {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+nav button {
+  margin-right: 30px;
+  font-size: 20px;
+  background-color: rgb(233, 247, 252);
+  color: rgb(53, 125, 151);
+  border: none;
+}
+
+nav button:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+p {
+  font-size: 30px;
+}
+
+.hr {
+  margin-left: -10px;
+  margin-right: -10px;
+  background-color: rgb(53, 125, 151);
+  height: 1px;
+  border: none;
+}
+
+#firstBlock {
+  display: flex;
+
+  color: white;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 150px;
+
+  background: #999ff0;
+}
+
+#secondBlock {
+  display: flex;
+
+  color: white;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 150px;
+
+  background: #f7c625;
+}
+
+#thirdBlock {
+  display: flex;
+
+  color: white;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 150px;
+
+  background: #329e8c;
+}
+
+#fourthBlock {
+  display: flex;
+
+  color: white;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 150px;
+
+  background: #f09999;
+}
+
+#fifthBlock {
+  display: flex;
+
+  color: white;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 150px;
+
+  background: #75e9f8;
+}
+
+#sixthBlock {
+  display: flex;
+
+  color: white;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 150px;
+
+  background: #75f8ac;
+}
+
+nav h1 {
+  color: rgb(53, 125, 151);
+  font-family: Helvetica, sans-serif;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}

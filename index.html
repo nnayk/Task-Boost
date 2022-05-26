@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Oooh+Baby&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <nav>
+            <h1>TASK BOOST</h1>
+            <!-- <hr class="hr"> -->
+            <button id="timer-btn">Timer</button>
+            <button id="goal-btn">Goals</button>
+            <button id="site-btn">Blocked Sites</button>
+        </nav>
+        <hr class="hr">
+        <div class="timerPage">
+        <div class="time">
+            <input type="text" maxlength="2" value="00" id="hours"><span>:</span>
+            <input type="text" maxlength="2" value="00" id="minutes"><span>:</span>
+            <input type="text" maxlength="2" value="00" id="seconds">
+            <ul id="ul-el"></ul>
+        </div>
+
+        <div class="timerButtons">
+            <button id="start-btn">START</button>
+            <button id="reset-btn">RESET</button>
+        </div>
+        </div>
+    
+    <div class="goalPage">
+    <input type="text" id="ola" value="">
+    <button id="addBtn">Add Goal</button>
+    <button id="rmGoals">Remove All</button>
+    <ul id="goalList"></ul>
+    </div>
+
+    <div class="sitesPage">
+        <input type="text" id="siteIn" value="">
+        <button id="addSiteBtn">Block Site</button>
+        <button id="blockTab">Block Current Tab</button>
+        <button id="rmSites">Remove All</button>
+        <ul id="siteList"></ul>
+        </div>
+    <script src="index.js"></script>
+    </body>
+</html>
