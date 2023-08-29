@@ -1,6 +1,7 @@
-let myLeads = parseInt(JSON.parse(localStorage.getItem("myLeads")));
+let timeLeft = parseInt(JSON.parse(localStorage.getItem("timeLeft")));
 let action = JSON.parse(localStorage.getItem("action"));
 
+// various ui elements for manipulating later
 const hrsEl = document.getElementById("hours");
 const minEl = document.getElementById("minutes");
 const secEl = document.getElementById("seconds");
@@ -14,11 +15,11 @@ const addGoalBtn = document.getElementById("addBtn");
 const addSiteBtn = document.getElementById("addSiteBtn");
 
 let currGoals = [];
-let lanky = localStorage.getItem("allGoals");
-console.log("lankatesh = " + lanky);
-if (lanky) {
-  lanky = JSON.parse(localStorage.getItem("allGoals"));
-  currGoals = lanky;
+let allGoals = localStorage.getItem("allGoals");
+/* populate the goals list */
+if (allGoals) {
+  allGoals = JSON.parse(localStorage.getItem("allGoals"));
+  currGoals = allGoals;
   const goals = document.getElementById("goalList");
   for (let i = 0; i < currGoals.length; i++) {
     var li = document.createElement("li");
@@ -35,6 +36,7 @@ if (lanky) {
   localStorage.setItem("allGoals", JSON.stringify(currGoals));
 }
 
+/* populate the blocked sites list */
 let blockedSites = [];
 let blocked = localStorage.getItem("allSites");
 if (blocked) {
@@ -56,6 +58,7 @@ if (blocked) {
   localStorage.setItem("allSites", JSON.stringify(blockedSites));
 }
 
+/* set original high-level display */
 if (localStorage.getItem("goal") == "true") {
   goalBtn.style.textDecoration = "underline";
   timerBtn.style.textDecoration = "none";
@@ -63,9 +66,7 @@ if (localStorage.getItem("goal") == "true") {
   document.querySelector(".timerPage").style.display = "none";
   document.querySelector(".goalPage").style.display = "block";
   document.querySelector(".sitesPage").style.display = "none";
-  // document.querySelector(".time").style.display = "none";
-  // document.querySelector(".timerButtons").style.display = "none";
-  document.querySelector("#ola").innerText = "Hello";
+  document.querySelector("#goals").innerText = "Hello";
 } else if (localStorage.getItem("site") == "true") {
   siteBtn.style.textDecoration = "underline";
   goalBtn.style.textDecoration = "none";
@@ -79,11 +80,10 @@ if (localStorage.getItem("goal") == "true") {
   siteBtn.style.textDecoration = "none";
   document.querySelector(".timerPage").style.display = "block";
   document.querySelector(".sitesPage").style.display = "none";
-  //document.querySelector(".time").style.display = "flex";
-  //document.querySelector(".timerButtons").style.display = "flex";
   document.querySelector(".goalPage").style.display = "none";
 }
 
+/* configure goal label */
 goalBtn.addEventListener("click", function () {
   localStorage.setItem("goal", true);
   localStorage.setItem("site", true);
@@ -92,13 +92,11 @@ goalBtn.addEventListener("click", function () {
   siteBtn.style.textDecoration = "none";
   document.querySelector(".timerPage").style.display = "none";
   document.querySelector(".goalPage").style.display = "block";
-  //document.querySelector(".timerButtons").style.display = "flex";
   document.querySelector(".sitesPage").style.display = "none";
-  // document.querySelector(".time").style.display = "none";
-  // document.querySelector(".timerButtons").style.display = "none";
-  document.querySelector("#ola").innerText = "Hello";
+  document.querySelector("#goals").innerText = "Hello";
 });
 
+/* configure timer label */
 timerBtn.addEventListener("click", function () {
   localStorage.setItem("goal", false);
   localStorage.setItem("site", false);
@@ -106,13 +104,11 @@ timerBtn.addEventListener("click", function () {
   goalBtn.style.textDecoration = "none";
   siteBtn.style.textDecoration = "none";
   document.querySelector(".timerPage").style.display = "block";
-  //document.querySelector(".time").style.display = "flex";
-  //document.querySelector(".timerButtons").style.display = "flex";
   document.querySelector(".goalPage").style.display = "none";
-  //document.querySelector(".timerButtons").style.display = "flex";
   document.querySelector(".sitesPage").style.display = "none";
 });
 
+/* configure site block label */
 siteBtn.addEventListener("click", function () {
   localStorage.setItem("site", true);
   localStorage.setItem("goal", false);
@@ -120,15 +116,14 @@ siteBtn.addEventListener("click", function () {
   goalBtn.style.textDecoration = "none";
   timerBtn.style.textDecoration = "none";
   document.querySelector(".goalPage").style.display = "none";
-  //document.querySelector(".timerButtons").style.display = "flex";
   document.querySelector(".timerPage").style.display = "none";
-  //document.querySelector(".timerButtons").style.display = "flex";
   document.querySelector(".sitesPage").style.display = "block";
 });
 
+/* configure goal set button */
 addGoalBtn.addEventListener("click", function () {
   const goals = document.getElementById("goalList");
-  const newGoal = document.getElementById("ola").value;
+  const newGoal = document.getElementById("goals").value;
 
   if (newGoal != "") {
     var li = document.createElement("li");
@@ -144,10 +139,11 @@ addGoalBtn.addEventListener("click", function () {
     currGoals.push(newGoal);
     localStorage.setItem("allGoals", JSON.stringify(currGoals));
 
-    document.getElementById("ola").value = "";
+    document.getElementById("goals").value = "";
   }
 });
 
+/* configure site add button */
 addSiteBtn.addEventListener("click", function () {
   const sites = document.getElementById("siteList");
   const newSite = document.getElementById("siteIn").value;
@@ -170,6 +166,7 @@ addSiteBtn.addEventListener("click", function () {
   }
 });
 
+/* configure remove all goals button */
 const rmGoals = document.getElementById("rmGoals");
 rmGoals.addEventListener("click", function () {
   const goals = document.getElementById("goalList");
@@ -178,6 +175,7 @@ rmGoals.addEventListener("click", function () {
   localStorage.setItem("allGoals", currGoals);
 });
 
+/* configure remove all sites button */
 const rmSites = document.getElementById("rmSites");
 rmSites.addEventListener("click", function () {
   const sites = document.getElementById("siteList");
@@ -186,6 +184,7 @@ rmSites.addEventListener("click", function () {
   localStorage.setItem("allSites", blockedSites);
 });
 
+/* handle event where new blocked site is added */
 const blockTab = document.getElementById("blockTab");
 blockTab.addEventListener("click", function () {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -218,12 +217,9 @@ setInterval(function () {
       for (let i = 0; i < blockedSites.length; i++) {
         if (blockedSites[i] == div.innerText.slice(0, -1)) {
           blockedSites.splice(i, 1);
-          //break;
         }
       }
-      console.log("huzza " + currGoals + " wizza " + currGoals.length);
       localStorage.setItem("allSites", JSON.stringify(blockedSites));
-      //console.log("Somalia " + div.innerText);
     };
   }
 });
@@ -238,12 +234,10 @@ setInterval(function () {
       for (let i = 0; i < currGoals.length; i++) {
         if (currGoals[i] == div.innerText.slice(0, -1)) {
           currGoals.splice(i, 1);
-          //break;
         }
       }
       console.log("huzza " + currGoals + " wizza " + currGoals.length);
       localStorage.setItem("allGoals", JSON.stringify(currGoals));
-      //console.log("Somalia " + div.innerText);
     };
   }
 });
@@ -256,10 +250,10 @@ const yourFunction = async () => {
   console.log("Waited 1s");
 };
 
-if (isNaN(myLeads)) {
+if (isNaN(timeLeft)) {
   console.log("roar");
-  myLeads = 0;
-  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+  timeLeft = 0;
+  localStorage.setItem("timeLeft", JSON.stringify(timeLeft));
 }
 
 if (localStorage.getItem("resume") == "true") {
@@ -269,7 +263,7 @@ if (localStorage.getItem("resume") == "true") {
   inputBtn.style.borderColor = "#33D1FF";
 } else if (
   localStorage.getItem("paused") == "true" &&
-  parseInt(localStorage.getItem("myLeads")) > 0
+  parseInt(localStorage.getItem("timeLeft")) > 0
 ) {
   console.log("paused starty");
   inputBtn.style.background = "#893eb2";
@@ -311,10 +305,8 @@ if (
 console.log("rayudu");
 console.log(localStorage.getItem("action"));
 
-//ulEl.innerHTML = `<p>${localStorage.getItem("myLeads")}</p>`;
-
 if (localStorage.getItem("action") == "true") {
-  let secondsLeft = parseInt(localStorage.getItem("myLeads"));
+  let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
   let hours = Math.floor(secondsLeft / 3600);
   let minutes = Math.floor(secondsLeft / 60) - hours * 60;
   let seconds = secondsLeft % 60;
@@ -323,11 +315,11 @@ if (localStorage.getItem("action") == "true") {
   secEl.value = `${("0" + seconds).slice(-2)}`;
 }
 
-render(myLeads);
+render(timeLeft);
 
 if (localStorage.getItem("action")) {
   setInterval(function () {
-    let secondsLeft = parseInt(localStorage.getItem("myLeads"));
+    let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
     if (secondsLeft != 0) {
       if (localStorage.getItem("resume") != "true") {
         inputBtn.style.background = "#893eb2";
@@ -350,9 +342,8 @@ if (localStorage.getItem("action")) {
         text: `${minutes}:${("0" + seconds).slice(-2)}`,
       });
     }
-    //ulEl.innerHTML = `<p>${minutes}:${("0" + seconds).slice(-2)}</p>`;
     if (localStorage.getItem("action") == "true") {
-      let secondsLeft = parseInt(localStorage.getItem("myLeads"));
+      let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
       let hours = Math.floor(secondsLeft / 3600);
       let minutes = Math.floor(secondsLeft / 60) - hours * 60;
       let seconds = secondsLeft % 60;
@@ -361,12 +352,11 @@ if (localStorage.getItem("action")) {
       secEl.value = `${("0" + seconds).slice(-2)}`;
     }
 
-    //inputEl.value = `${minutes}:${("0" + seconds).slice(-2)}`;
   }, 1);
 }
 
 setInterval(function () {
-  if (localStorage.getItem("myLeads") <= 0) {
+  if (localStorage.getItem("timeLeft") <= 0) {
     inputBtn.style.background = "#3ab9a4";
     inputBtn.style.borderColor = "#3ab9a4";
     inputBtn.innerText = "START";
@@ -378,19 +368,16 @@ setInterval(function () {
     localStorage.setItem("resume", false);
     localStorage.setItem("action", false);
     console.log("abey");
-    console.log(localStorage.getItem("myLeads"));
-    //localStorage.setItem("myLeads", 0);
+    console.log(localStorage.getItem("timeLeft"));
   }
 }, 1);
 
 function render() {
   console.log("outie");
-  //console.log(action);
   x = chrome.extension.getBackgroundPage();
-  myLeads = parseInt(localStorage.getItem("myLeads"));
+  timeLeft = parseInt(localStorage.getItem("timeLeft"));
   if (!localStorage.getItem("action")) {
-    console.log(myLeads);
-    //x.greet(parseInt(myLeads), ulEl);
+    console.log(timeLeft);
   }
 }
 
@@ -409,14 +396,14 @@ inputBtn.addEventListener("click", function () {
     inputBtn.innerText = "START";
     console.log("entered start");
     console.log(minEl.innerText);
-    console.log(localStorage.getItem("myLeads"));
+    console.log(localStorage.getItem("timeLeft"));
     let seconds =
       parseFloat(minEl.value * 60) +
       parseFloat(secEl.value) +
       parseFloat(hrsEl.value * 3600);
     console.log("uya1 " + seconds);
     if (seconds > 0) {
-      let secondsLeft = parseInt(localStorage.getItem("myLeads"));
+      let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
       let hours = Math.floor(seconds / 3600);
       seconds -= hours * 3600;
       let minutes = Math.floor(seconds / 60);
@@ -436,15 +423,11 @@ inputBtn.addEventListener("click", function () {
       console.log("anjappar");
       console.log(minEl.innerText);
       console.log("pampi" + time);
-      localStorage.setItem("myLeads", JSON.stringify(time));
+      localStorage.setItem("timeLeft", JSON.stringify(time));
       localStorage.setItem("action", true);
       x = chrome.extension.getBackgroundPage();
       console.log("passed time");
 
-      //console.log("hempi");
-      //console.log(secondsLeft);
-      //console.log(minutes);
-      //console.log(seconds);
       if (hours > 0) {
         chrome.browserAction.setBadgeText({
           text: `${hours} hr`,
@@ -461,10 +444,10 @@ inputBtn.addEventListener("click", function () {
     localStorage.setItem("paused", false);
     localStorage.setItem("resume", false);
     localStorage.setItem(
-      "myLeads",
-      parseInt(localStorage.getItem("myLeads") - 1)
+      "timeLeft",
+      parseInt(localStorage.getItem("timeLeft") - 1)
     );
-    let secondsLeft = parseInt(localStorage.getItem("myLeads"));
+    let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
     let hours = Math.floor(secondsLeft / 3600);
     secondsLeft -= hours * 3600;
     let minutes = Math.floor(secondsLeft / 60);
@@ -484,27 +467,17 @@ inputBtn.addEventListener("click", function () {
     console.log("passed time");
     x.greet();
   } else {
-    /* setInterval(function () {
-      inputBtn.disabled = true;
-    }, 1000);*/
     console.log("entered paused");
     yourFunction();
     console.log("done with it");
-    //console.log("hempi");
-    //console.log(secondsLeft);
-    //console.log(minutes);
-    //console.log(seconds);
     inputBtn.disabled = true;
     localStorage.setItem("paused", true);
-    localStorage.setItem("myLeads", parseInt(localStorage.getItem("myLeads")));
+    localStorage.setItem("timeLeft", parseInt(localStorage.getItem("timeLeft")));
     inputBtn.innerText = "RESUME";
     inputBtn.style.background = "#33D1FF";
     inputBtn.style.borderColor = "#33D1FF";
     localStorage.setItem("resume", true);
-    //console.log("apple");
-    //console.log(isNaN(localStorage.getItem("resume")));
-    //console.log(localStorage.getItem("resume"));
-    let secondsLeft = parseInt(localStorage.getItem("myLeads"));
+    let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
     let hours = Math.floor(secondsLeft / 3600);
     secondsLeft -= hours * 3600;
     let minutes = Math.floor(secondsLeft / 60);
@@ -539,8 +512,6 @@ resetBtn.addEventListener("click", function () {
   inputBtn.innerText = "START";
   resetBtn.style.background = "#f5f5f5";
   resetBtn.style.color = "#c3c3c3";
-  //console.log("ching");
-  //console.log(localStorage.getItem("action"));
-  localStorage.setItem("myLeads", 0);
+  localStorage.setItem("timeLeft", 0);
   x = chrome.extension.getBackgroundPage();
 });
