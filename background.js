@@ -11,7 +11,7 @@ function greet() {
     /* timer is not paused, perform some checks */
     } else {
       /* calculate the time left in HH:MM:SS for display purposes */
-      let secondsLeft = parseInt(localStorage.getItem("myLeads"));
+      let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
       if (secondsLeft > 0) {
         secondsLeft -= 1;
       }
@@ -29,17 +29,17 @@ function greet() {
         });
       }
       /* time is up, sound the alarm */
-      if (parseInt(localStorage.getItem("myLeads")) <= 1) {
+      if (parseInt(localStorage.getItem("timeLeft")) <= 1) {
         if (localStorage.getItem("action") == "true") {
           audio = new Audio("timeUp.mp4");
           audio.play();
         }
-        localStorage.setItem("myLeads", JSON.stringify(0));
+        localStorage.setItem("timeLeft", JSON.stringify(0));
         clearInterval(timer);
       } else {
         localStorage.setItem(
-          "myLeads",
-          JSON.stringify(localStorage.getItem("myLeads") - 1)
+          "timeLeft",
+          JSON.stringify(localStorage.getItem("timeLeft") - 1)
         );
       }
     }
@@ -50,7 +50,7 @@ function greet() {
 setInterval(function () {
   if (
     localStorage.getItem("action") == "true" &&
-    localStorage.getItem("myLeads") > 1
+    localStorage.getItem("timeLeft") > 1
   ) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       try {
