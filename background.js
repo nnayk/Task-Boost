@@ -1,32 +1,18 @@
-let lellu = null;
+/*
+This file is responsible for managing and measuring the time for the timer.
+*/
+let timer = null;
 function greet() {
-  lellu = setInterval(function () {
-    //console.log("ibra");
-    console.log(localStorage.getItem("paused"));
+  timer = setInterval(function () {
+    /* if timer is paused, stop the current timer */
     console.log(localStorage.getItem("paused") == "true");
     if (localStorage.getItem("paused") == "true") {
-      clearInterval(lellu);
+      clearInterval(timer);
+    /* timer is not paused, perform some checks */
     } else {
-      //console.log(localStorage.getItem("action"));
-      //console.log(time);parseInt(
-      //console.log("opli");
-      //console.log(localStorage.getItem("myLeads", JSON.stringify(time)));
-      try {
-        //const ulEl = document.getElementById("ul-el");
-        //console.log("z");
-        //console.log(ulEl);
-        //const ulEl = document.getElementById("ul-el");
-        //ulEl.innerHTML = `<p>${parseInt(localStorage.getItem("myLeads"))}</p>`;
-      } catch {
-        //bala.innerHTML = `<p>${parseInt(localStorage.getItem("myLeads"))}</p>`;
-        //console.log("caught");
-      }
+      /* calculate the time left in HH:MM:SS for display purposes */
       let secondsLeft = parseInt(localStorage.getItem("myLeads"));
-      //console.log("relu");
-      //console.log(secondsLeft);
-
       if (secondsLeft > 0) {
-        //console.log("shiggle");
         secondsLeft -= 1;
       }
       let hours = Math.floor(secondsLeft / 3600);
@@ -42,27 +28,14 @@ function greet() {
           text: `${minutes}:${("0" + seconds).slice(-2)}`,
         });
       }
+      /* time is up, sound the alarm */
       if (parseInt(localStorage.getItem("myLeads")) <= 1) {
-        //console.log("somu123");
-        //console.log(localStorage.getItem("action"));
-        //console.log(localStorage.getItem("action") == "true");
         if (localStorage.getItem("action") == "true") {
           audio = new Audio("timeUp.mp4");
           audio.play();
-
-          // chrome.notifications.create(
-          //   "Done",
-          //   {
-          //     type: "basic",
-          //     title: "Time is up!",
-          //     message: "",
-          //     iconUrl: "Task Boost.png",
-          //   },
-          //   function () {}
-          // );
         }
         localStorage.setItem("myLeads", JSON.stringify(0));
-        clearInterval(lellu);
+        clearInterval(timer);
       } else {
         localStorage.setItem(
           "myLeads",
@@ -70,34 +43,24 @@ function greet() {
         );
       }
     }
-
-    //console.log("hengi");
-    //console.log(localStorage.getItem("myLeads"));
   }, 1000);
 }
-//console.log("jiggli");
 
+/* check and act upon blocked sites if timer is running */
 setInterval(function () {
   if (
     localStorage.getItem("action") == "true" &&
     localStorage.getItem("myLeads") > 1
   ) {
-    let siteBock = localStorage.getItem("allSites");
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      console.log("hi");
-      console.log(window.location.href);
       try {
         siteBlock = JSON.parse(localStorage.getItem("allSites"));
-        console.log("babel " + siteBlock);
-        console.log("babru " + siteBlock[0]);
         console.log(tabs[0].url);
-        console.log(tabs[0].url == "https://www.youtube.com/");
         if (siteBlock.includes(tabs[0].url)) {
-          console.log("jiggy");
           chrome.tabs.update({ url: "siteBlock.html" });
         }
       } catch (e) {
-        console.log("eoor");
+        console.log(e);
       }
     });
   }
