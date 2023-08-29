@@ -6,13 +6,6 @@ body {
   background-color: rgb(233, 247, 252);
 }
 
-/*input {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  margin-bottom: 4px;
-}*/
-
 /* Style the "Add" button */
 #addBtn {
   margin-right: 5px;
@@ -57,7 +50,7 @@ body {
   border: 1px rgba(1, 49, 35, 0.342);
 }
 
-#ola,
+#goals,
 #siteIn {
   font-size: 26px;
   color: rgb(53, 125, 151);
@@ -85,7 +78,6 @@ input {
   justify-content: center;
   width: 100%;
   transition: all 0.2s ease-in-out;
-  /*background-color: red;*/
 }
 
 #start-btn {
