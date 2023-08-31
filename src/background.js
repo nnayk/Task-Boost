@@ -31,7 +31,7 @@ function greet() {
       /* time is up, sound the alarm */
       if (parseInt(localStorage.getItem("timeLeft")) <= 1) {
         if (localStorage.getItem("action") == "true") {
-          audio = new Audio("timeUp.mp4");
+          audio = new Audio("../artifacts/timeUp.mp4");
           audio.play();
         }
         localStorage.setItem("timeLeft", JSON.stringify(0));

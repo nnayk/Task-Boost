@@ -1,3 +1,7 @@
+/*
+CSS for the entire UI  
+*/
+
 body {
   margin: 0;
   padding: 10px;
@@ -6,7 +10,6 @@ body {
   background-color: rgb(233, 247, 252);
 }
 
-/* Style the "Add" button */
 #addBtn {
   margin-right: 5px;
   padding: 8px;
@@ -186,7 +189,6 @@ button[disabled="disabled"] {
   border: none;
   border-color: none;
   font-size: 50px;
-  /* color: white; */
   color: rgb(53, 125, 151);
   width: 50%;
 }

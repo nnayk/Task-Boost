@@ -1,7 +1,7 @@
 let timeLeft = parseInt(JSON.parse(localStorage.getItem("timeLeft")));
 let action = JSON.parse(localStorage.getItem("action"));
 
-// various ui elements for manipulating later
+// various ui elements for manipulation
 const hrsEl = document.getElementById("hours");
 const minEl = document.getElementById("minutes");
 const secEl = document.getElementById("seconds");
@@ -58,7 +58,7 @@ if (blocked) {
   localStorage.setItem("allSites", JSON.stringify(blockedSites));
 }
 
-/* set original high-level display */
+/* set default high-level layout */
 if (localStorage.getItem("goal") == "true") {
   goalBtn.style.textDecoration = "underline";
   timerBtn.style.textDecoration = "none";
@@ -236,7 +236,6 @@ setInterval(function () {
           currGoals.splice(i, 1);
         }
       }
-      console.log("huzza " + currGoals + " wizza " + currGoals.length);
       localStorage.setItem("allGoals", JSON.stringify(currGoals));
     };
   }
@@ -251,31 +250,31 @@ const yourFunction = async () => {
 };
 
 if (isNaN(timeLeft)) {
-  console.log("roar");
   timeLeft = 0;
   localStorage.setItem("timeLeft", JSON.stringify(timeLeft));
 }
 
+/* display appropriate text and color for timer */
+/* if timer is paused, show resume button */
 if (localStorage.getItem("resume") == "true") {
-  console.log("resume starty");
   inputBtn.innerText = "RESUME";
   inputBtn.style.background = "#33D1FF";
   inputBtn.style.borderColor = "#33D1FF";
+/* if time is running, show pause button */
 } else if (
   localStorage.getItem("paused") == "true" &&
   parseInt(localStorage.getItem("timeLeft")) > 0
 ) {
-  console.log("paused starty");
   inputBtn.style.background = "#893eb2";
   inputBtn.style.borderColor = "#893eb2";
   inputBtn.innerText = "PAUSE";
+/* show start button */
 } else {
-  console.log("start starty");
   inputBtn.style.background = "#3ab9a4";
   inputBtn.style.borderColor = "#3ab9a4";
-  inputBtn.innerText = "START";
 }
 
+/* set timer metadata */
 if (
   (isNaN(localStorage.getItem("action")) ||
     localStorage.getItem("action") == null) &&
@@ -283,7 +282,6 @@ if (
 ) {
   localStorage.setItem("action", false);
 }
-
 if (
   isNaN(localStorage.getItem("paused")) ||
   (localStorage.getItem("paused") == null &&
@@ -291,20 +289,16 @@ if (
 ) {
   localStorage.setItem("paused", false);
 }
-
 if (
   (isNaN(localStorage.getItem("resume")) ||
     localStorage.getItem("resume") == null) &&
   localStorage.getItem("resume") != "true"
 ) {
-  console.log("resume init");
   console.log(localStorage.getItem("resume"));
   localStorage.setItem("resume", false);
 }
 
-console.log("rayudu");
-console.log(localStorage.getItem("action"));
-
+/* real-time timer display */
 if (localStorage.getItem("action") == "true") {
   let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
   let hours = Math.floor(secondsLeft / 3600);
@@ -314,9 +308,6 @@ if (localStorage.getItem("action") == "true") {
   minEl.value = `${("0" + minutes).slice(-2)}`;
   secEl.value = `${("0" + seconds).slice(-2)}`;
 }
-
-render(timeLeft);
-
 if (localStorage.getItem("action")) {
   setInterval(function () {
     let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
@@ -354,7 +345,6 @@ if (localStorage.getItem("action")) {
 
   }, 1);
 }
-
 setInterval(function () {
   if (localStorage.getItem("timeLeft") <= 0) {
     inputBtn.style.background = "#3ab9a4";
@@ -367,24 +357,12 @@ setInterval(function () {
     localStorage.setItem("paused", false);
     localStorage.setItem("resume", false);
     localStorage.setItem("action", false);
-    console.log("abey");
     console.log(localStorage.getItem("timeLeft"));
   }
 }, 1);
 
-function render() {
-  console.log("outie");
-  x = chrome.extension.getBackgroundPage();
-  timeLeft = parseInt(localStorage.getItem("timeLeft"));
-  if (!localStorage.getItem("action")) {
-    console.log(timeLeft);
-  }
-}
-
+/* add listeners to buttons */
 inputBtn.addEventListener("click", function () {
-  console.log(
-    "uya " + secEl.value + " hours " + hrsEl.value + " min " + minEl.value
-  );
   if (
     localStorage.getItem("paused") == "false" &&
     localStorage.getItem("action") == "false" &&
@@ -403,7 +381,6 @@ inputBtn.addEventListener("click", function () {
       parseFloat(hrsEl.value * 3600);
     console.log("uya1 " + seconds);
     if (seconds > 0) {
-      let secondsLeft = parseInt(localStorage.getItem("timeLeft"));
       let hours = Math.floor(seconds / 3600);
       seconds -= hours * 3600;
       let minutes = Math.floor(seconds / 60);
@@ -420,9 +397,7 @@ inputBtn.addEventListener("click", function () {
           parseFloat(secEl.value) +
           parseFloat(hrsEl.value) * 3600
       );
-      console.log("anjappar");
       console.log(minEl.innerText);
-      console.log("pampi" + time);
       localStorage.setItem("timeLeft", JSON.stringify(time));
       localStorage.setItem("action", true);
       x = chrome.extension.getBackgroundPage();
@@ -462,7 +437,6 @@ inputBtn.addEventListener("click", function () {
       });
     }
     inputBtn.innerText = "RESUME";
-    console.log("pampi");
     console.log(minEl.innerText);
     console.log("passed time");
     x.greet();
@@ -494,7 +468,6 @@ inputBtn.addEventListener("click", function () {
     yourFunction();
   }
 });
-
 resetBtn.addEventListener("click", function () {
   if (localStorage.getItem("action") == "true") {
     hrsEl.value = "00";

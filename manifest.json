@@ -7,14 +7,14 @@
         "permissions": ["tabs"],
         "icons":
         {
-          "1":"Task Boost.png"
+          "1":"./artifacts/Task Boost.png"
         },
         "browser_action": {
-          "default_popup": "index.html",
-          "default_icon":"Task Boost.png"      
+          "default_popup": "./src/index.html",
+          "default_icon":"./artifacts/Task Boost.png"      
         },
         "background": {
-          "scripts": ["background.js"]
+          "scripts": ["./src/background.js"]
         }
       
   }
