@@ -7,7 +7,7 @@
     <img src="artifacts/Task Boost.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Task Boost</h3>
 </div>
 
 <!-- ABOUT THE PROJECT -->
@@ -26,9 +26,9 @@ This extension can be downloaded on the Chrome Web Store <a href='https://chrome
 
 User Experience Layout:
 <br>
-<img src="artifacts/ux1.png" alt="Logo" width="450" height="300">
-<img src="artifacts/ux2.png" alt="Logo" width="450" height="300">
-<img src="artifacts/ux3.png" alt="Logo" width="450" height="300">
+<img src="artifacts/ux1.png" alt="Logo" width="500" height="300">
+<img src="artifacts/ux2.png" alt="Logo" width="500" height="300">
+<img src="artifacts/ux3.png" alt="Logo" width="500" height="300">
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
